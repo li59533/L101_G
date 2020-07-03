@@ -1,0 +1,24 @@
+--cpu Cortex-M0+
+".\main.o"
+".\filter.o"
+".\lm005a.o"
+".\mkl_adc.o"
+".\mkl_gpio.o"
+".\mkl_spi.o"
+".\mkl_tpm.o"
+".\mkl_uart.o"
+".\mkl_pit.o"
+".\mkl_lptmr.o"
+".\mkl_lpo_rtc.o"
+".\retarget_mdk.o"
+".\mcg.o"
+".\arm_cm0.o"
+".\startup_mkl25z4.o"
+".\system8m.o"
+".\modbus.o"
+".\w25qxx.o"
+".\flash.o"
+--strict --scatter ".\YE5955-LORA.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\YE5955-LORA.map" -o .\YE5955-LORA.axf
