@@ -32,3 +32,6 @@
 .\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\main.o: .\DRV\MKL_gpio.h
 .\main.o: APP\filter.h
+.\main.o: .\mdl\rttviewer\clog.h
+.\main.o: .\mdl\rttviewer\SEGGER_RTT.h
+.\main.o: .\mdl\rttviewer\SEGGER_RTT_Conf.h

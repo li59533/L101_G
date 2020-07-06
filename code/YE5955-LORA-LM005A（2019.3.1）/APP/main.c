@@ -31,6 +31,7 @@
 
 #include "MKL_gpio.h"
 #include "filter.h"
+#include "clog.h"
 /*********************************************************************************************************
 ** Function name:           Delayus
 ** Descriptions:            驱动GPIO 翻转Demo
@@ -795,7 +796,11 @@ void  EMU()
 	RMS_Xdate=(float)RMS_Xdate*0.050354;//3.3V的基准电压，65536满量程
 	RMS_Xdate=RMS_Xdate*0.0128*4;//
 	RMS_Xdate=RMS_Xdate*100*config.ADCscale*config.CRTscale/config.LMDscale;     //原因跟加速是相同的
-	Parameter.xdate=RMS_Xdate*0.5f;			
+	Parameter.xdate=RMS_Xdate*0.5f;	
+
+	Clog_Float("Parameter.adate:" , Parameter.adate);
+	Clog_Float("Parameter.vdate:" , Parameter.vdate);
+	Clog_Float("Parameter.xdate:" , Parameter.xdate);
 }
 
 
@@ -1016,6 +1021,7 @@ uint32_t  waitreceive_count=0;
 
 int main(void)            
 {
+	DEBUG("Start\r\n");
 	uint32_t  currentclock = 0;
 	uint32_t  saveconfig_flag = 0;
 	uint32_t  vlpstime=0;
@@ -1055,7 +1061,9 @@ int main(void)
 	
 	ADPowerSelect(1);	
 	GDPowerSelect(1); 
-	
+		
+		
+		
 	if(1)
 	{
 		while(!LM005A_ADR_SET(1));
@@ -1067,6 +1075,7 @@ int main(void)
 		while(!LM005A_JOIN_SET())
 		{
 			GDConnect1++;
+			DEBUG("GDConnect1:%d\r\n" , GDConnect1);
 			/*3次连接失败，进入离线模式，30分钟后重启*/
 			if(GDConnect1>=3)
 			{
@@ -1087,12 +1096,14 @@ int main(void)
 				rtcIntConfig(vlpstime,MKL_RTC_TAI);  
 				
 				ENTER_VLPS(); 
-				
+				DEBUG("NVIC_SystemReset\r\n");
 				NVIC_SystemReset();
 			}
 		}		
 	}
 
+	
+	DEBUG("Pass AT CMD\r\n");
 	LED_POWER(0);
     ConnectIndication();        	
 	
@@ -1102,6 +1113,7 @@ int main(void)
 		saveconfig_flag++;
 		if(saveconfig_flag>10)
 		{
+			DEBUG("Save conf\r\n");
 			saveconfig_flag=0;
 			saveConfig();
 		}
@@ -1220,15 +1232,16 @@ int main(void)
 		LED_SIGNAL(0);
 		/*计算唤醒时间**********************************/								 
 		vlpsstartclock=(uint32_t)(RTC_TSR);                    //获取当前时间
+		DEBUG("config.workcycleminutes:%d\r\n" , config.workcycleminutes);
 		if(config.alarmminutetime>vlpsstartclock)              //config.alarmminutetime是闹钟开始时间
 		{
 			intervalclock=config.alarmminutetime-vlpsstartclock;
-			nextclock=intervalclock%(config.workcycleminutes*60);
+			nextclock=intervalclock%(config.workcycleminutes*10);
 		}
 		else
 		{
 			intervalclock=vlpsstartclock-config.alarmminutetime;
-			nextclock=(config.workcycleminutes*60)-intervalclock%(config.workcycleminutes*60);
+			nextclock=(config.workcycleminutes*10)-intervalclock%(config.workcycleminutes*10);
 		}
 		if(nextclock==0) nextclock=1; //防止错乱
 

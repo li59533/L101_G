@@ -324,7 +324,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>KEIL FREEDOM CMSIS FTFA</Define>
               <Undefine></Undefine>
-              <IncludePath>.\DRV;.\APP;.\STARTUP;.\CMSIS;.\STARTUP\headers;.\CMSIS\Include;.\Modbus;.\K60flash;.\W25Q128;.\DRV;.\lowpower;D:\YE5955-LORA-LM005A</IncludePath>
+              <IncludePath>.\DRV;.\APP;.\STARTUP;.\CMSIS;.\STARTUP\headers;.\CMSIS\Include;.\Modbus;.\K60flash;.\W25Q128;.\DRV;.\lowpower;D:\YE5955-LORA-LM005A;.\mdl;.\mdl\rttviewer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1005,6 +1005,26 @@
               <FileName>powerswitch.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lowpower\powerswitch.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>mdl/rtt</GroupName>
+          <Files>
+            <File>
+              <FileName>clog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mdl\rttviewer\clog.c</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_RTT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mdl\rttviewer\SEGGER_RTT.c</FilePath>
+            </File>
+            <File>
+              <FileName>SEGGER_RTT_printf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mdl\rttviewer\SEGGER_RTT_printf.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -18,6 +18,9 @@
 ".\modbus.o"
 ".\w25qxx.o"
 ".\flash.o"
+".\clog.o"
+".\segger_rtt.o"
+".\segger_rtt_printf.o"
 --strict --scatter ".\YE5955-LORA.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

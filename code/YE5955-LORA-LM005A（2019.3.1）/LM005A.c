@@ -5,7 +5,7 @@
 #include <string.h>  
 #include <stdbool.h>
 #include <stdarg.h>
-
+#include "clog.h"
 
 #if defined ( __CC_ARM   )
 #pragma anon_unions
@@ -245,7 +245,7 @@ bool  LM005A_Cmd ( char * cmd, char * reply1, char * reply2, uint32_t waittime )
 	time_delay_ms( waittime );                 //延时
 	
 	strLM005A_Fram_Record .Data_RX_BUF [ strLM005A_Fram_Record .InfBit .FramLength ]  = '\0';
-  
+	DEBUG("Rev:%s\r\n" ,strLM005A_Fram_Record.Data_RX_BUF );
 	if ( ( reply1 != 0 ) && ( reply2 != 0 ) )
 		return ( ( bool ) strstr ( strLM005A_Fram_Record .Data_RX_BUF, reply1 ) || 
 						 ( bool ) strstr ( strLM005A_Fram_Record .Data_RX_BUF, reply2 ) ); 
@@ -310,6 +310,7 @@ bool  LM005A_AT_Test ( void )
 bool  LM005A_ADR_SET ( uint32_t  ADRvalue )
 {
 	char cCmd [120];
+	DEBUG("ADR_SET\r\n");
 	sprintf ( cCmd, "AT+ADR=%d", ADRvalue );
 	return LM005A_Cmd ( cCmd, "OK", "no change", 1000 );   //等1s钟	
 }
@@ -324,6 +325,7 @@ bool  LM005A_ADR_SET ( uint32_t  ADRvalue )
 bool  LM005A_JOIN_SET (void)
 {
 	char cCmd [120];
+	DEBUG("JOIN_SET \r\n");
 	sprintf (cCmd, "AT+JOIN");
 	return LM005A_Cmd ( cCmd, "RXDONE", "no change",15000 );   //等1s钟	
 }
@@ -354,6 +356,7 @@ bool  LM005A_RESET (void)
 bool  LM005A_DR_SET ( uint32_t  DRvalue )
 {
 	char cCmd [120];
+	DEBUG("DR_SET\r\n");
 	sprintf ( cCmd, "AT+DR=%d", DRvalue );
 	return LM005A_Cmd ( cCmd, "OK", "no change", 1000 );   //等1s钟	
 }
@@ -370,6 +373,7 @@ bool  LM005A_DR_SET ( uint32_t  DRvalue )
 bool  LM005A_MODE_SET ( uint32_t  MODEvalue )
 {
 	char cCmd [120];
+	DEBUG("MODE_SET \r\n");
 	sprintf ( cCmd, "AT+MODE=%d", MODEvalue );
 	return LM005A_Cmd ( cCmd, "OK", "no change", 500 );   //等1s钟	
 }
@@ -385,6 +389,7 @@ bool  LM005A_MODE_SET ( uint32_t  MODEvalue )
 bool  LM005A_CLASS_SET ( uint32_t  CLASSvalue )
 {
 	char cCmd [120];
+	DEBUG("CLASS_SET \r\n");
 	sprintf ( cCmd, "AT+CLASS=%d", CLASSvalue );
 	return LM005A_Cmd ( cCmd, "OK", "no change", 500 );   //等1s钟	
 }
@@ -400,6 +405,7 @@ bool  LM005A_CLASS_SET ( uint32_t  CLASSvalue )
 bool  LM005A_POWER_SET ( uint32_t  POWERvalue )
 {
 	char cCmd [120];
+	DEBUG("POWER_SET \r\n");
 	sprintf ( cCmd, "AT+POWER=%d", POWERvalue );
 	return LM005A_Cmd ( cCmd, "OK", "no change", 1000 );   //等1s钟	
 }

@@ -37,6 +37,7 @@ extern uint16_t  CRC16ISR1(uint8_t * puchMsg, uint8_t usDataLen);
 extern const  uint8_t      auchCRCHi[];
 extern const  uint8_t      auchCRCLo[];
 
+void  uart_send_data_uart0(uint8_t *sendstring,uint32_t data_length);
 
 
 #endif										

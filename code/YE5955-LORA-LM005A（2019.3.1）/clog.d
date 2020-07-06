@@ -1,0 +1,11 @@
+.\clog.o: mdl\rttviewer\clog.c
+.\clog.o: mdl\rttviewer\clog.h
+.\clog.o: mdl\rttviewer\SEGGER_RTT.h
+.\clog.o: mdl\rttviewer\SEGGER_RTT_Conf.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\clog.o: .\mdl\self_def.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\clog.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
