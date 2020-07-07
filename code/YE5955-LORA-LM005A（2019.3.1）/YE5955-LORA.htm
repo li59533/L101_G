@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\YE5955-LORA.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\YE5955-LORA.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jul 03 16:06:15 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Jul 07 21:19:26 2020
 <BR><P>
 <H3>Maximum Stack Usage =        584 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -935,11 +935,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9b]"></a>ENTER_VLPS</STRONG> (Thumb, 112 bytes, Stack size 8 bytes, main.o(i.ENTER_VLPS))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = ENTER_VLPS &rArr; pbe_pee &rArr; __aeabi_idivmod
+<P><STRONG><a name="[9b]"></a>ENTER_VLPS</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, main.o(i.ENTER_VLPS))
+<BR><BR>[Stack]<UL><LI>Max Depth = 432<LI>Call Chain = ENTER_VLPS &rArr; SEGGER_RTT_printf &rArr; SEGGER_RTT_vprintf &rArr; _PrintInt &rArr; _PrintUnsigned &rArr; _StoreChar &rArr; SEGGER_RTT_Write &rArr; SEGGER_RTT_WriteNoLock &rArr; _WriteNoCheck &rArr; __aeabi_memcpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;what_mcg_mode
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pbe_pee
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SEGGER_RTT_printf
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enter_vlps
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clockMonitor
 </UL>
@@ -974,7 +975,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a2]"></a>IOinit</STRONG> (Thumb, 258 bytes, Stack size 8 bytes, main.o(i.IOinit))
+<P><STRONG><a name="[a2]"></a>IOinit</STRONG> (Thumb, 642 bytes, Stack size 8 bytes, main.o(i.IOinit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IOinit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_EnableIRQ
@@ -1219,6 +1220,7 @@ Global Symbols
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LM005A_ADR_SET
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Clog_Float
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ENTER_VLPS
 </UL>
 
 <P><STRONG><a name="[c7]"></a>SEGGER_RTT_vprintf</STRONG> (Thumb, 536 bytes, Stack size 136 bytes, segger_rtt_printf.o(i.SEGGER_RTT_vprintf))

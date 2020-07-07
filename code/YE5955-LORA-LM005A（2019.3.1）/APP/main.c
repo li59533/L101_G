@@ -609,36 +609,90 @@ void  enter_vlps(void)
 
 void  IOinit()                                                
 {
+// ----------- LMT 01 ---------------------
 	/* PD7外部中断初始化,用于温度检测 */
 	IO_FUN_SEL(MKL_PORTD,7,1);       
 	GPIO_DDR_INPUT(MKL_PORTD,7);
 	IO_IRQ_CONFIG(MKL_PORTD,7,IO_RISE_EDGE_IRQ);    //上升沿       
 	NVIC_EnableIRQ(PORTC_PORTD_IRQn);               //外部中断使能
-	
-//	/* PD6外部中断初始化,用于恢复设置 */
-//	IO_FUN_SEL(MKL_PORTD,6,1);       
-//	GPIO_DDR_INPUT(MKL_PORTD,6);
-//	IO_IRQ_CONFIG(MKL_PORTD,6,IO_RISE_EDGE_IRQ);     //上升沿 
-//	NVIC_EnableIRQ(PORTC_PORTD_IRQn);                //外部中断使能
-
-	IO_FUN_SEL(MKL_PORTE,19,1);      //网络模块睡眠/启动控制引脚
-	GPIO_DDR_OUTPUT(MKL_PORTE,19); 
-	GPIO_SET(MKL_PORTE,19);          //拉高正常工作
-	//GPIO_CLR(MKL_PORTE,19);        //拉低进入低功耗
-	
-	IO_FUN_SEL(MKL_PORTE,0,1);       //AD模块电源
-	GPIO_DDR_OUTPUT(MKL_PORTE,0);
-	
-	IO_FUN_SEL(MKL_PORTE,1,1);       //无线模块电源
+// ----------------------------------------
+// -------------LMT 01 Power---------------	
+	IO_FUN_SEL(MKL_PORTE,17,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTE,17); 
+	GPIO_CLR(MKL_PORTE,17); 
+// ----------------------------------------	
+// ------------ Analog Power ---------------
+	IO_FUN_SEL(MKL_PORTE,0,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTE,0); 
+	GPIO_CLR(MKL_PORTE,0);          
+// ----------------------------------------
+// ------------ Transfer Power ------------
+	IO_FUN_SEL(MKL_PORTE,1,1);      
 	GPIO_DDR_OUTPUT(MKL_PORTE,1); 
-	
-	IO_FUN_SEL(MKL_PORTE,16,1);      //红色电源灯
+	GPIO_CLR(MKL_PORTE,1); 	
+// ----------------------------------------
+// ------------ Sen Out--------------------
+	IO_FUN_SEL(MKL_PORTE,18,1);      
+	GPIO_DDR_INPUT(MKL_PORTE,18); 
+	GPIO_CLR(MKL_PORTE,18); 
+// ----------------------------------------
+// ------------ Tranfer GPIO0 -------------
+	IO_FUN_SEL(MKL_PORTE,19,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTE,19); 
+	GPIO_SET(MKL_PORTE,19); 
+// ----------------------------------------
+// ------------ Tranfer CHP PU-------------
+	IO_FUN_SEL(MKL_PORTB,1,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTB,1); 
+	GPIO_SET(MKL_PORTB,1); 
+// ----------------------------------------
+// ------------ LED -----------------------
+	IO_FUN_SEL(MKL_PORTB,0,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTB,0); 
+	GPIO_SET(MKL_PORTB,0); 	
+// ----------------------------------------	
+
+// ---------- Key ----------------
+	IO_FUN_SEL(MKL_PORTD,6,1);      
+	GPIO_DDR_INPUT(MKL_PORTD,6); 
+	GPIO_CLR(MKL_PORTD,6); 
+// -------------------------------	
+
+// --------Uart ------------------
+	IO_FUN_SEL(MKL_PORTA,1,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTA,1); 
+	GPIO_CLR(MKL_PORTA,1); 	
+
+	IO_FUN_SEL(MKL_PORTA,2,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTA,2); 
+	GPIO_CLR(MKL_PORTA,2); 	
+// -------------------------------
+// --------Uart ------------------
+	IO_FUN_SEL(MKL_PORTD,5,1);      
+	GPIO_DDR_INPUT(MKL_PORTD,5); 
+	GPIO_CLR(MKL_PORTD,5); 
+
+	IO_FUN_SEL(MKL_PORTD,4,1);      
+	GPIO_DDR_INPUT(MKL_PORTD,4); 
+	GPIO_CLR(MKL_PORTD,4);
+// --------------------------------
+
+// ---------- Z Out ------------------
+	IO_FUN_SEL(MKL_PORTC,2,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTC,2); 
+	GPIO_CLR(MKL_PORTC,2);	
+// -----------------------------------
+// ------------ X out----------------------
+	IO_FUN_SEL(MKL_PORTE,16,1);      
 	GPIO_DDR_OUTPUT(MKL_PORTE,16); 
-	GPIO_SET(MKL_PORTE,16);
+	GPIO_CLR(MKL_PORTE,16); 	
+// ----------------------------------------
+// ---------- Y Out ------------------
+	IO_FUN_SEL(MKL_PORTE,30,1);      
+	GPIO_DDR_OUTPUT(MKL_PORTE,30); 
+	GPIO_CLR(MKL_PORTE,30);	
+// -----------------------------------	
 	
-	IO_FUN_SEL(MKL_PORTB,0,1);       //绿色信号灯
-	GPIO_DDR_OUTPUT(MKL_PORTB,0);
-	GPIO_SET(MKL_PORTB,0);
 }
 
 
@@ -867,6 +921,7 @@ uint32_t  InputIOtimer = 0;
 
 void  ENTER_VLPS(void)
 {
+	DEBUG("ENTER_VLPS\r\n");
 	unsigned char op_mode; 
 	
 	enter_vlps();  //1 Means: Any interrupt could wake up from this mode   Go to VLPS				 
@@ -1058,11 +1113,16 @@ int main(void)
 	AD_VInter=0;
 	AD_AInter=0;
 
-	
 	ADPowerSelect(1);	
 	GDPowerSelect(1); 
-		
-		
+	
+//	ENTER_VLPS(); 
+//	
+//	while(1)
+//	{
+//		DEBUG("while\r\n");
+//	}
+
 		
 	if(1)
 	{
@@ -1235,21 +1295,21 @@ int main(void)
 		DEBUG("config.workcycleminutes:%d\r\n" , config.workcycleminutes);
 		if(config.alarmminutetime>vlpsstartclock)              //config.alarmminutetime是闹钟开始时间
 		{
-			intervalclock=config.alarmminutetime-vlpsstartclock;
-			nextclock=intervalclock%(config.workcycleminutes*10);
+			intervalclock = config.alarmminutetime-vlpsstartclock;
+			nextclock=intervalclock%(config.workcycleminutes*60);
 		}
 		else
 		{
 			intervalclock=vlpsstartclock-config.alarmminutetime;
-			nextclock=(config.workcycleminutes*10)-intervalclock%(config.workcycleminutes*10);
+			nextclock=(config.workcycleminutes*60)-intervalclock%(config.workcycleminutes*60);
 		}
 		if(nextclock==0) nextclock=1; //防止错乱
 
 		/*进入VLPS休眠模式**********************************/ 
 		ADPowerSelect(0);                           
 
-		currentclock=RTC_TSR;
-		vlpstime=currentclock+nextclock;
+		currentclock = RTC_TSR;
+		vlpstime = currentclock+nextclock;
 		rtcIntConfig(vlpstime,MKL_RTC_TAI);             //50秒进入睡眠时间，VLPS状态，功耗最低，1.7ua的待机电流，关闭2.8V电压
 															
 		ENTER_VLPS(); 
