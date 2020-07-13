@@ -1,6 +1,6 @@
 Dependencies for Project 'YE5955-LORA', Target 'YE5955-LORA': (DO NOT MODIFY !)
 F (.\APP\includes.h)(0x5C0F7050)()
-F (.\APP\main.c)(0x5F04765B)(--c99 -c --cpu Cortex-M0+ -g -O0 --apcs=interwork --split_sections -I .\DRV -I .\APP -I .\STARTUP -I .\CMSIS -I .\STARTUP\headers -I .\CMSIS\Include -I .\Modbus -I .\K60flash -I .\W25Q128 -I .\DRV -I .\lowpower -I D:\YE5955-LORA-LM005A -I .\mdl -I .\mdl\rttviewer-I.\RTE\_YE5955-LORA-ID:\Keil_v5\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.14.0\Device\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.14.0-D__UVISION_VERSION="528" -DMKL16Z64xxx4 -DKEIL -DFREEDOM -DCMSIS -DFTFA-o .\main.o --omf_browse .\main.crf --depend .\main.d)
+F (.\APP\main.c)(0x5F0BD769)(--c99 -c --cpu Cortex-M0+ -g -O0 --apcs=interwork --split_sections -I .\DRV -I .\APP -I .\STARTUP -I .\CMSIS -I .\STARTUP\headers -I .\CMSIS\Include -I .\Modbus -I .\K60flash -I .\W25Q128 -I .\DRV -I .\lowpower -I D:\YE5955-LORA-LM005A -I .\mdl -I .\mdl\rttviewer-I.\RTE\_YE5955-LORA-ID:\Keil_v5\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.14.0\Device\Include-ID:\Keil_v5\ARM\CMSIS\Include-ID:\Keil_v5\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.14.0-D__UVISION_VERSION="528" -DMKL16Z64xxx4 -DKEIL -DFREEDOM -DCMSIS -DFTFA-o .\main.o --omf_browse .\main.crf --depend .\main.d)
 I (APP\includes.h)(0x5C0F7050)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5CEB79E2)

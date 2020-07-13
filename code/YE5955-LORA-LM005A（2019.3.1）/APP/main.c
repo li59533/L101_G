@@ -280,9 +280,15 @@ void  LPTimer_IRQHandler(void)
 void  ADPowerSelect(uint8_t yesorno)      /*用在控制AD采样电路的通断  */    
 {                                   
 	if(yesorno==1)
-	{GPIO_SET(MKL_PORTE,0); }                                           
+	{
+		GPIO_SET(MKL_PORTE,0); 
+		GPIO_SET(MKL_PORTE,17);
+	}                                           
 	if(yesorno==0)
-	{GPIO_CLR(MKL_PORTE,0); }										
+	{
+		GPIO_CLR(MKL_PORTE,0); 
+		GPIO_CLR(MKL_PORTE,17); 
+	}										
 }
 
 
@@ -852,6 +858,9 @@ void  EMU()
 	RMS_Xdate=RMS_Xdate*100*config.ADCscale*config.CRTscale/config.LMDscale;     //原因跟加速是相同的
 	Parameter.xdate=RMS_Xdate*0.5f;	
 
+
+
+	Clog_Float("Parameter.adate:" , Parameter.pdate);
 	Clog_Float("Parameter.adate:" , Parameter.adate);
 	Clog_Float("Parameter.vdate:" , Parameter.vdate);
 	Clog_Float("Parameter.xdate:" , Parameter.xdate);
@@ -1000,7 +1009,7 @@ void  TPM1_IRQHandler(void)
 	}
 	else if(tx_condition==0)
 	{
-		if(!GPIO_GET_VALUE(MKL_PORTD,7))
+		if(GPIO_GET_VALUE(MKL_PORTD,7))
 			TX_pre_counter++;
 		else
 			TX_pre_counter=0;	
